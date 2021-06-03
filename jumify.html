@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>Jumify</title>
+
+    <style>
+        body {
+            font-family: Helvetica, sans-serif;
+        }
+
+        h1 {
+            margin-bottom: 0;
+        }
+
+        label {
+            display: block;
+        }
+
+        main {
+            display: flex;
+            align-items: end;
+        }
+
+        textarea {
+            width: 500px;
+        }
+    </style>
+</head>
+
+<body>
+<h1>Jumify my text</h1>
+<h5>You can only enter lowercase characters. All other input will be ignored.</h5>
+
+<main>
+    <div>
+        <label for="input">Input</label>
+        <textarea rows="10" id="input"></textarea>
+        <button id="jumifyBtn">Jumify!</button>
+    </div>
+
+
+    <img src="static/img/jum_original.png">
+
+    <div>
+        <label for="output">Output</label>
+        <textarea rows="10" id="output"></textarea>
+        <button id="dejumifyBtn">De-Jumify!</button>
+    </div>
+</main>
+
+<script src="static/js/jumify.js"></script>
+
+</body>
+</html>
