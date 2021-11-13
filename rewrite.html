@@ -24,64 +24,63 @@
     </style>
 </head>
 <body>
-    <div class="content">
-        <fieldset>
-            <legend>Settings</legend>
+<div class="content">
+    <fieldset>
+        <legend>Settings</legend>
 
-            <div class="input-group">
-                <label for="rules">Rules</label>
-                <textarea id="rules" name="rules" cols="5"></textarea>
-            </div>
+        <div class="input-group">
+            <label for="rules">Rules</label>
+            <textarea id="rules" name="rules" cols="5"></textarea>
+        </div>
 
-            <div class="input-group">
-                <label for="axiom">Axiom</label>
-                <input id="axiom" name="axiom" value="X">
-            </div>
+        <div class="input-group">
+            <label for="axiom">Axiom</label>
+            <input id="axiom" name="axiom" value="X">
+        </div>
 
-            <div class="input-group">
-                <label for="iterations">Iterations</label>
-                <input id="iterations" name="iterations" value="5">
-            </div>
+        <div class="input-group">
+            <label for="iterations">Iterations</label>
+            <input id="iterations" name="iterations" value="5">
+        </div>
 
-            <div class="input-group">
-                <label for="initialAngle">Initial Angle</label>
-                <input id="initialAngle" name="initialAngle" value="270">
-            </div>
+        <div class="input-group">
+            <label for="initialAngle">Initial Angle</label>
+            <input id="initialAngle" name="initialAngle" value="270">
+        </div>
 
-            <div class="input-group">
-                <label for="turnAngle">Turn angle</label>
-                <input id="turnAngle" name="turnAngle" value="25">
-            </div>
+        <div class="input-group">
+            <label for="turnAngle">Turn angle</label>
+            <input id="turnAngle" name="turnAngle" value="25">
+        </div>
 
-            <div class="input-group">
-                <label for="branchLength">Branch length</label>
-                <input id="branchLength" name="branchLength" value="5">
-            </div>
+        <div class="input-group">
+            <label for="branchLength">Branch length</label>
+            <input id="branchLength" name="branchLength" value="5">
+        </div>
 
-            <div class="input-group">
-                <label for="x">Start X</label>
-                <input id="x" name="x" value="250">
-            </div>
+        <div class="input-group">
+            <label for="x">Start X</label>
+            <input id="x" name="x" value="250">
+        </div>
 
-            <div class="input-group">
-                <label for="y">Start Y</label>
-                <input id="y" name="y" value="250">
-            </div>
+        <div class="input-group">
+            <label for="y">Start Y</label>
+            <input id="y" name="y" value="250">
+        </div>
 
-            <div style="margin-bottom: 12px">
-                <input type="checkbox" id="randomness" name="randomness">
-                <label for="randomness">Add randomness</label>
-            </div>
+        <div style="margin-bottom: 12px">
+            <input type="checkbox" id="randomness" name="randomness">
+            <label for="randomness">Add randomness</label>
+        </div>
 
-            <button onclick="draw()">Draw</button>
-        </fieldset>
+        <button onclick="draw()">Draw</button>
+    </fieldset>
 
-        <canvas></canvas>
-    </div>
+    <canvas></canvas>
+</div>
 
 
-<script src="static/js/rewrite.js" type="text/javascript"></script>
-<script src="static/js/canvas.js" type="text/javascript"></script>
-
+<script src="rewrite.js" type="text/javascript"></script>
+<script src="canvas.js" type="text/javascript"></script>
 </body>
 </html>

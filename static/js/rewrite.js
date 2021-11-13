@@ -1,54 +1,69 @@
-(function (){
-    function next(term, rules) {
-        let state = {ranges: [{start: 0, end: term.length - 1}], matches: []};
+(function () {
+    function next(initialTerm, rules) {
+        let terms = [{product: false, term: initialTerm}];
 
-        for (const rule of rules) {
-            if (state.ranges.length === 0) {
-                break;
-            }
+        for (const stochasticRule of rules) {
+            // todo remember start i
+            for (let i = 0; i < terms.length; i++) {
+                if (terms[i].product) continue;
 
-            let nextState = matchRule(term, rule, state);
+                const currentTerm = terms[i].term;
+                const result = matchRule(currentTerm, stochasticRule);
 
-            while (nextState != null) {
-                state = nextState;
-                nextState = matchRule(term, rule, state);
+                if (result) {
+                    terms.splice(i, 1, ...result);
+                }
             }
         }
 
-        for (const range of state.ranges) {
-            const pseudoMatch = {pos: range.start, value: term.slice(range.start, range.end + 1).join('')};
-            state.matches.push(pseudoMatch);
-        }
-
-        state.matches.sort((a, b) => a.pos - b.pos);
-
-        return state.matches.map(({value}) => value).join('');
+        return terms.map(({product, term}) => product ? term : term.join('')).join('');
     }
 
-    function matchRule(term, rule, state) {
-        for (let i = 0; i < state.ranges.length; i++) {
-            const range = state.ranges[i];
-            const pos = matchRange(term, rule, range);
-
-            if (pos > -1) {
-                state.matches.push({pos, value: rule.to});
-                state.ranges.splice(i, 1, ...substractFromRange(range, pos, rule.from.length));
-                return state;
-            }
+    function pickRule(stochasticRule) {
+        // todo improve https://blog.bruce-hill.com/a-faster-weighted-random-choice
+        let remaining = Math.random() * stochasticRule.total;
+        for (let i = 0; i < stochasticRule.outcomes.length; i++) {
+            remaining -= stochasticRule.outcomes[i].p;
+            if (remaining < 0) return stochasticRule.outcomes[i];
         }
-
-        return null;
     }
 
-    function matchRange(term, rule, range) {
-        for (let i = range.start; i <= range.end; i++) {
-            if (rule.from.length > (range.end - i + 1)) return -1;
+    function matchRule(term, stochasticRule) {
+        const rule = pickRule(stochasticRule);
+        const pos = matchSlidingWindow(term, rule);
+
+        if (pos < 0) {
+            return [retain(term)];
+        }
+
+        const start = term.slice(0, pos);
+        const end = term.slice(pos + rule.from.length, term.length);
+
+        const result = [];
+        if (start.length > 0) result.push(retain(start));
+        result.push(produce(rule));
+        if (end.length > 0) result.push(retain(end));
+
+        return result;
+    }
+
+    function produce(rule) {
+        return {product: true, term: rule.to};
+    }
+
+    function retain(term) {
+        return {product: false, term};
+    }
+
+    function matchSlidingWindow(term, rule) {
+        for (let i = 0; i < term.length; i++) {
+            if (rule.from.length > term.length - i) return -1; // 0 1 2 3 4 5
 
             const matches = matchAtPosition(term, rule, i);
-            if (matches) {
-                return i;
-            }
+            if (matches) return i;
         }
+
+        return -1;
     }
 
     function matchAtPosition(term, rule, pos) {
@@ -59,20 +74,6 @@
         }
 
         return true;
-    }
-
-    function substractFromRange(range, pos, length) {
-        if (pos === range.start) {
-            const start = range.start + length;
-            return start > range.end ? [] : [{start, end: range.end}];
-        } else if (pos + length - 1 === range.end) {
-            return [{start: range.start, end: range.end - length}];
-        } else {
-            return [
-                {start: range.start, end: pos - 1},
-                {start: pos + length, end: range.end}
-            ];
-        }
     }
 
     window.next = next;
