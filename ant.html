@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Ants</title>
+
+    <style>
+        .content {
+            display: flex;
+        }
+
+        fieldset.settings {
+            display: flex;
+            flex-direction: column;
+            flex: 0 1 300px;
+            justify-items: start;
+        }
+
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 12px;
+        }
+
+    </style>
+</head>
+<body>
+<div class="content">
+    <fieldset class="settings">
+        <legend>Settings</legend>
+
+        <div class="input-group">
+            <label for="rule">Rule</label>
+            <input id="rule" name="rule" value="LR">
+        </div>
+
+        <div class="input-group">
+            <label for="antx">Ant Start X</label>
+            <input id="antx" name="antx" value="250">
+        </div>
+
+        <div class="input-group">
+            <label for="anty">Ant Start Y</label>
+            <input id="anty" name="anty" value="250">
+        </div>
+
+        <div class="input-group">
+            <label for="antdx">Ant Start Direction X</label>
+            <input id="antdx" name="antdx" value="1">
+        </div>
+
+        <div class="input-group">
+            <label for="antdy">Ant Start Direction Y</label>
+            <input id="antdy" name="antdy" value="0">
+        </div>
+
+        <div class="input-group">
+            <label for="skip">Skip steps</label>
+            <input id="skip" name="skip" value="0">
+        </div>
+
+        <div class="input-group">
+            <label for="stepsperframe">Steps per frame</label>
+            <input id="stepsperframe" name="stepsperframe" value="50">
+        </div>
+
+        <fieldset style="margin-bottom: 12px">
+            <legend>Color</legend>
+
+            <div style="margin-bottom: 12px">
+                <input type="radio" id="colorpreset" name="color" value="colorpreset" checked>
+                <label for="colorpreset">Preset color (10, loops)</label>
+            </div>
+
+            <div style="margin-bottom: 12px">
+                <input type="radio" id="colorgraydient" name="color" value="colorgraydient">
+                <label for="colorgraydient">White to black gradient</label>
+            </div>
+        </fieldset>
+
+        <button onclick="handleRunClicked()">Run</button>
+    </fieldset>
+
+    <canvas></canvas>
+</div>
+
+
+<script src="static/js/ant.js" type="text/javascript"></script>
+</body>
+</html>
