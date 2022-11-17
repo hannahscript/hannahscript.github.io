@@ -73,8 +73,16 @@ function loadSettings() {
         ctx: canvas.getContext('2d'),
         initialSteps: +getSetting('skip'),
         stepsPerFrame: +getSetting('stepsperframe'),
-        rules: parseRule(getSetting('rule')),
-        colorStrategy: getRadioSetting('color') === 'colorpreset' ? getColorStatic : getColorGraydient
+        rules: parseRule(getSetting('rule'))
+    };
+
+    const colorSetting = getRadioSetting('color');
+    if (colorSetting === 'colorpreset') {
+        config.colorStrategy = getColorStatic;
+    } else if (colorSetting === 'colorgraydient') {
+        config.colorStrategy = getColorGraydient;
+    } else {
+        config.colorStrategy = createPalette();
     }
 }
 
@@ -130,8 +138,30 @@ function getColor(n, max) {
     return config.colorStrategy(n, max);
 }
 
+function createPalette() {
+    const palette = getSetting('palette')
+        .trim()
+        .replace(/\s\s*/g, ' ')
+        .split(' ');
+
+    return (n) => palette[n % palette.length];
+}
+
 function getColorStatic(n, max) {
-    return ['white', 'darkmagenta', 'red', 'orange', 'blue', 'cyan', 'darkcyan', 'green', 'darkgreen', 'darkolivegreen'][n % 10];
+    // https://lospec.com/palette-list/ink-crimson
+    const palette = [
+        '#ff0546',
+        '#9c173b',
+        '#660f31',
+        '#450327',
+        '#270022',
+        '#17001d',
+        '#09010d',
+        '#0ce6f2',
+        '#0098db',
+        '#1e579c'
+    ];
+    return palette[n % 10];
 }
 
 function getColorGraydient(n, max) {

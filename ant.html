@@ -76,6 +76,17 @@
                 <input type="radio" id="colorgraydient" name="color" value="colorgraydient">
                 <label for="colorgraydient">White to black gradient</label>
             </div>
+
+            <div style="margin-bottom: 12px">
+                <input type="radio" id="colorcustom" name="color" value="colorcustom">
+                <label for="colorcustom">Use custom palette below</label>
+            </div>
+
+            <div class="input-group">
+                <label for="palette">Custom palette</label>
+                <textarea id="palette" name="palette">#ff0546 #9c173b #660f31 #450327 #270022 #17001d #09010d #0ce6f2 #0098db #1e579c</textarea>
+                <a style="font-size: 0.7em" target="_blank" href="https://lospec.com/palette-list/ink-crimson">Link to color palette</a>
+            </div>
         </fieldset>
 
         <button onclick="handleRunClicked()">Run</button>
