@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Magic Duel</title>
+
+    <style>
+        .grid {
+            display: inline-grid;
+            grid-template-rows: repeat(11, 1fr);
+            grid-template-columns: repeat(11, 1fr);
+            gap: 4px;
+            margin-bottom: 12px;
+        }
+
+        .cell {
+            width: 64px;
+            height: 64px;
+            /*background-color: #ddd;*/
+            border: 1px solid #ddd;
+
+            transform: rotate(0deg);
+            transition: transform 300ms linear;
+        }
+
+        .cell > img {
+            position: absolute;
+            margin: auto;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+        }
+
+        .rotated {
+            transform: rotate(180deg);
+            transition: transform 300ms linear;
+        }
+    </style>
+</head>
+<body>
+<h1 id="winner"></h1>
+<div style="display: flex; flex-direction: row; justify-content: center; align-items: start; flex-wrap: wrap; margin-bottom: 12px">
+    <fieldset style="margin-right: 12px">
+        <legend>Action</legend>
+
+        <div>
+            <input type="radio" id="move" name="action" value="move" checked/>
+            <label for="move">Move (Key M)</label>
+        </div>
+
+        <div>
+            <input type="radio" id="fireball" name="action" value="fireball"/>
+            <label for="fireball">Fireball (Key F)</label>
+        </div>
+
+        <div>
+            <input type="radio" id="mirror_lr" name="action" value="mirror_lr"/>
+            <label for="mirror_lr">Vertical Mirror | (Key L)</label>
+        </div>
+
+        <div>
+            <input type="radio" id="mirror_ud" name="action" value="mirror_ud"/>
+            <label for="mirror_ud">Horizontal Mirror - (Key U)</label>
+        </div>
+    </fieldset>
+
+    <div style="display: flex; flex-direction: column; align-content: center; flex-wrap: wrap; margin-bottom: 12px">
+        <div id="grid" class="grid">
+            <!-- filled in js -->
+        </div>
+    </div>
+</div>
+
+
+<div>
+    <div>
+        <label for="host">Server</label>
+        <input type="text" id="host" value="ws://localhost:8080/ws">
+        <button onclick="connectWs()">Connect</button>
+        <button onclick="reconnect()">Reconnect</button>
+    </div>
+
+</div>
+
+
+<script src="static/js/magicduel.js"></script>
+</body>
+</html>
