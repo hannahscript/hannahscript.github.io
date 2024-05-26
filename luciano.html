@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Luciano Puzzle</title>
+
+    <style>
+        table {
+            table-layout: fixed;
+        }
+        td {
+            width: 20px;
+            overflow: hidden;
+        }
+
+        fieldset {
+            float: right;
+            display: flex;
+            flex-direction: column;
+            flex: 0 1 300px;
+        }
+    </style>
+</head>
+<body>
+
+<div style="float: left">
+    <table id="puzzle"></table>
+    <small>Look to the right for the puzzle description</small>
+</div>
+
+<fieldset>
+    <legend>Editor</legend>
+
+    <button class="editor" onclick="addRow()">Add row</button>
+    <button class="editor" onclick="removeRow()">Remove row</button>
+    <button class="editor" onclick="addColumn()">Add column</button>
+    <button class="editor" onclick="removeColumn()">Remove column</button>
+    <label for="description">Write puzzle description here</label>
+    <textarea class="editor" id="description" rows="12">
+    
+</textarea>
+    <button class="editor" onclick="savePuzzle()">Create puzzle and generate link</button>
+    <input class="editor" id="link">
+</fieldset>
+
+
+
+<script type="text/javascript" src="static/js/luciano.js"></script>
+</body>
+</html>
